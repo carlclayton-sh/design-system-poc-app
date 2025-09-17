@@ -1,3 +1,4 @@
+import Button from '@samcurteis/design-system-poc/src/components/button/Button';
 import { useState } from 'react';
 import './App.scss';
 import reactLogo from './assets/react.svg';
@@ -25,6 +26,13 @@ function App() {
         >
           count is {count}
         </button>
+        <Button
+          className="primary"
+          isLoading={count >= 10}
+          onClick={() => alert('Hello!')}
+        >
+          Click Me
+        </Button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
