@@ -1,5 +1,40 @@
 @use '@samcurteis/design-system-poc/src/index.scss' as *;
+// @use '../../design-system-poc/src/index.scss' as *;
 
-.my-class {
-  background-color: $color-primary;
+.login-container {
+  max-width: 400px;
+  margin: 5rem auto;
+  padding: 2rem;
+  border-radius: $radius-md;
+  background: var(--color-background);
+  color: var(--color-text);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.login-form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.login-form input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: $radius-sm;
+  font-size: 1rem;
+}
+
+.theme-toggle {
+  margin-top: 1.5rem;
+  text-align: center;
 }

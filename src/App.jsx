@@ -1,47 +1,71 @@
 import Button from '@samcurteis/design-system-poc/src/components/button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.scss';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState('light');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      alert(`Logged in!\nEmail: ${email}\nPassword: ${password}`);
+      setIsLoading(false);
+    }, 2000);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button
-          className="button--primary"
-          onClick={() => setCount((count) => count + 1)}
-          disabled={count >= 10}
-        >
-          count is {count}
-        </button>
-        <Button
-          className="primary"
-          isLoading={count >= 10}
-          onClick={() => alert('Hello!')}
-        >
-          Click Me
+    <div className="login-container">
+      <h1 className="login-title">Welcome Back</h1>
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <Button type="submit" className="primary" isLoading={isLoading}>
+          Log In
         </Button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        <div className="my-class">I AM PRIMARY</div>
+      </form>
+
+      <div className="theme-toggle">
+        <button
+          className="button button--secondary"
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          disabled={isLoading}
+        >
+          Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 
